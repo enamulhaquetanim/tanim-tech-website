@@ -2,38 +2,89 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "Image/gallery"
-public_folder: "/Image/gallery"
+# Path where Decap saves images inside your GitHub repo
+media_folder: "Tanim Tech Web/Image"
+# URL path used on the live site
+public_folder: "Image"
 
 collections:
-  - name: "gallery"
-    label: "Photo Gallery"
+  - name: "content"
+    label: "Website Content"
+    delete: false
+    editor:
+      preview: false
     files:
-      - name: "gallery"
-        label: "Gallery Photos"
-        file: "content/gallery.json"
+      # 1. Site Metadata & Navigation
+      - name: "site_settings"
+        label: "Site Settings & Navigation"
+        file: "Tanim Tech Web/content/settings.json"
         fields:
-          - label: "Photos"
-            name: "items"
+          - { label: "Site Title", name: "title", widget: "string", default: "Tanim Tech" }
+          - { label: "Logo Text", name: "logo_text", widget: "string", default: "Tanim Tech" }
+          - label: "Navigation Items"
+            name: "navigation"
             widget: "list"
             fields:
-              - { label: "Photo", name: "image", widget: "image" }
-              - { label: "Alt text (for accessibility & SEO)", name: "alt", widget: "string" }
-              - label: "Category"
-                name: "category"
-                widget: "select"
-                options: ["design", "events", "behind-the-scenes"]
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Target ID (e.g., #home, #gallery)", name: "url", widget: "string" }
 
-  - name: "faq"
-    label: "FAQ"
-    files:
-      - name: "faq"
-        label: "Frequently Asked Questions"
-        file: "content/faq.json"
+      # 2. Hero / Home Section
+      - name: "hero"
+        label: "Hero Section"
+        file: "Tanim Tech Web/content/hero.json"
         fields:
-          - label: "Questions"
+          - { label: "Eyebrow Text", name: "eyebrow", widget: "string", default: "AVAILABLE FOR PROJECTS" }
+          - { label: "Headline Pre-Text", name: "headline_start", widget: "string", default: "Building sharp " }
+          - { label: "Headline Highlight (Gradient)", name: "headline_highlight", widget: "string", default: "tech & content" }
+          - { label: "Headline End-Text", name: "headline_end", widget: "string", default: " for the AI era." }
+          - { label: "Role Text Rotator Options", name: "roles", widget: "list", default: ["Freelancer", "YouTuber", "Canva Designer", "Content Writer", "Digital Creator"] }
+          - { label: "Lede / Subtitle", name: "lede", widget: "text" }
+          - { label: "Fiverr URL", name: "fiverr_url", widget: "string" }
+          - { label: "Upwork URL", name: "upwork_url", widget: "string" }
+
+      # 3. About Me Section
+      - name: "about"
+        label: "About Me Section"
+        file: "Tanim Tech Web/content/about.json"
+        fields:
+          - { label: "Profile Picture", name: "profile_image", widget: "image" }
+          - { label: "Bio Paragraph", name: "bio", widget: "text" }
+          - { label: "Skills", name: "skills", widget: "list" }
+
+      # 4. Image Gallery Section
+      - name: "gallery"
+        label: "Image Gallery"
+        file: "Tanim Tech Web/content/gallery.json"
+        fields:
+          - { label: "Gallery Section Title", name: "title", widget: "string", default: "Image Gallery" }
+          - { label: "Gallery Subtitle", name: "subtitle", widget: "string", default: "A collection of my latest work and designs." }
+          - label: "Images"
             name: "items"
             widget: "list"
             fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
+              - { label: "Image File", name: "image", widget: "image" }
+              - { label: "Alt Text / Description", name: "alt", widget: "string" }
+
+      # 5. YouTube Videos Section
+      - name: "videos"
+        label: "YouTube Videos"
+        file: "Tanim Tech Web/content/videos.json"
+        fields:
+          - label: "Videos"
+            name: "video_list"
+            widget: "list"
+            fields:
+              - { label: "YouTube Embed URL", name: "embed_url", widget: "string" }
+              - { label: "Video Title", name: "title", widget: "string" }
+
+      # 6. FAQ Section
+      - name: "faq"
+        label: "FAQ Section"
+        file: "Tanim Tech Web/content/faq.json"
+        fields:
+          - label: "Questions & Answers"
+            name: "questions"
+            widget: "list"
+            fields:
+              - { label: "Question", name: "q", widget: "string" }
+              - { label: "Answer", name: "a", widget: "text" }
