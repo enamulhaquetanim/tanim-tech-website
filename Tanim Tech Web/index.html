@@ -106,6 +106,8 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
      crossorigin="anonymous"></script>
 
 
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>
 
 <body>
@@ -322,6 +324,18 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
 </footer>
 
 <script src="Script.js"></script>
+
+    <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
