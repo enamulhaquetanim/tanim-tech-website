@@ -1,0 +1,5 @@
+[functions]
+  external_node_modules = ["@netlify/blobs"]
+
+[edge_functions]
+  external_node_modules = ["@netlify/blobs"]
