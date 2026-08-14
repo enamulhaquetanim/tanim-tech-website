@@ -108,6 +108,9 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4428459779250323"
      crossorigin="anonymous"></script>
 
+    <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>
 
 <body>
@@ -353,5 +356,18 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
   }
 </script>
 
+    <!-- Netlify Identity Redirection Script -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function(user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function() {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+    
 </body>
 </html>
