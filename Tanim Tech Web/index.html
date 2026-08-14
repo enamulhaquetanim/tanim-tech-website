@@ -32,6 +32,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <!-- Netlify Identity Widget for Decap CMS -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -105,9 +108,6 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4428459779250323"
      crossorigin="anonymous"></script>
 
-
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
 </head>
 
 <body>
@@ -119,6 +119,7 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
         <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#videos">Videos</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#support">Support</a></li>
@@ -216,6 +217,20 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
                         <span>Canva Design</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section">
+    <div class="container">
+        <span class="eyebrow">// GALLERY</span>
+        <h2>Image Gallery</h2>
+
+        <div class="gallery-grid" id="gallery-container">
+            <div class="gallery-card">
+                <img src="Image/Tanim_Pic_cinematic.jpg" alt="Gallery Showcase" loading="lazy">
             </div>
         </div>
     </div>
@@ -325,11 +340,12 @@ window.CRISP_WEBSITE_ID="f316cac5-2382-44d8-9c5a-46b5278380eb";
 
 <script src="Script.js"></script>
 
-    <script>
+<!-- Netlify Identity Auto-Redirect to /admin/ on login/invite -->
+<script>
   if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
+    window.netlifyIdentity.on("init", function(user) {
       if (!user) {
-        window.netlifyIdentity.on("login", () => {
+        window.netlifyIdentity.on("login", function() {
           document.location.href = "/admin/";
         });
       }
