@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "image": "Image/gallery/design-1.jpg", "alt": "Canva design sample 1", "category": "design" },
+    { "image": "Image/gallery/design-2.jpg", "alt": "Canva design sample 2", "category": "design" },
+    { "image": "Image/gallery/design-3.jpg", "alt": "Canva design sample 3", "category": "design" },
+    { "image": "Image/gallery/event-1.jpg", "alt": "Event photo 1", "category": "events" },
+    { "image": "Image/gallery/event-2.jpg", "alt": "Event photo 2", "category": "events" },
+    { "image": "Image/gallery/bts-1.jpg", "alt": "Behind the scenes photo 1", "category": "behind-the-scenes" }
+  ]
+}
