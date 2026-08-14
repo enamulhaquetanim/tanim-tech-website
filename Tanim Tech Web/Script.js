@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (response.ok) {
-                    // Optional: add confirmation message
                     const confirmMsg = document.createElement('div');
                     confirmMsg.classList.add('message', 'system-message');
                     confirmMsg.textContent = 'Message sent and subscription confirmed!';
@@ -219,59 +218,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
 // --- ADVANCED FULL-TEXT SEARCH LOGIC ---
 const searchInput = document.getElementById('site-search');
 const searchResults = document.getElementById('search-results');
 
-// 1. Create an empty array to hold all the website's text
 let siteContentIndex = [];
 
-// 2. Function to scan the whole website and build the index
 function buildSearchIndex() {
-    siteContentIndex = []; // Reset the index
-    
-    // Find all sections on the page
+    siteContentIndex = [];
     const sections = document.querySelectorAll('section');
     
     sections.forEach(section => {
-        // Find all text elements inside this section (headings, paragraphs, lists)
         const textElements = section.querySelectorAll('h1, h2, h3, p, li, span');
         
         textElements.forEach(el => {
             const text = el.innerText.trim();
-            // Only save text that has actual words (longer than 5 characters)
             if (text.length > 5) {
                 siteContentIndex.push({
-                    element: el,          // Save the actual HTML element
-                    text: text            // Save the text to search through
+                    element: el,
+                    text: text
                 });
             }
         });
     });
 }
 
-// Run the scanner right when the page loads
 window.addEventListener('load', buildSearchIndex);
 
-// 3. The Search Engine Logic
 if (searchInput) {
     searchInput.addEventListener('input', function() {
         const query = this.value.toLowerCase().trim();
         searchResults.innerHTML = ''; 
         
-        if (query.length > 1) { // Start searching after 2 letters
-            // Find matching text anywhere on the site
+        if (query.length > 1) {
             const matches = siteContentIndex.filter(item => 
                 item.text.toLowerCase().includes(query)
             );
@@ -279,34 +258,27 @@ if (searchInput) {
             if (matches.length > 0) {
                 searchResults.style.display = 'block';
                 
-                // Show up to 8 results max so the dropdown doesn't get too long
                 matches.slice(0, 8).forEach(match => {
                     const li = document.createElement('li');
-                    
-                    // Create a short "snippet" of the text showing the match
                     const matchIndex = match.text.toLowerCase().indexOf(query);
                     const start = Math.max(0, matchIndex - 15);
                     const end = Math.min(match.text.length, matchIndex + query.length + 15);
                     let snippet = match.text.substring(start, end);
                     
-                    // Bold and color the matching word in the dropdown
                     const regex = new RegExp(query, "gi");
-                    snippet = snippet.replace(regex, matchedWord => `<strong style="color: var(--secondary-color);">${matchedWord}</strong>`);
+                    snippet = snippet.replace(regex, matchedWord => `<strong style="color: var(--cyan);">${matchedWord}</strong>`);
                     
                     li.innerHTML = `...${snippet}...`;
                     
-                    // When clicked, scroll right to that exact text!
                     li.onclick = () => {
-                        // Smooth scroll to the exact element
                         match.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         
-                        // Highlight the element on the screen briefly so the user sees it
                         const originalBg = match.element.style.backgroundColor;
                         match.element.style.transition = 'background-color 0.5s';
-                        match.element.style.backgroundColor = '#fff3cd'; // Light yellow highlight
+                        match.element.style.backgroundColor = 'rgba(79, 216, 196, 0.2)';
                         
                         setTimeout(() => {
-                            match.element.style.backgroundColor = originalBg; // Remove highlight after 2 seconds
+                            match.element.style.backgroundColor = originalBg;
                         }, 2000);
 
                         searchResults.style.display = 'none'; 
@@ -323,7 +295,6 @@ if (searchInput) {
         }
     });
 
-    // Hide dropdown if clicked outside
     document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
             searchResults.style.display = 'none';
